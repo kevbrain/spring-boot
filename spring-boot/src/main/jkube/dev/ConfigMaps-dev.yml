@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  namespace: spring-boot-dev
+  name: spring-boot-cm-0
+  labels:
+    app: spring-boot
+data:  {} 
+---

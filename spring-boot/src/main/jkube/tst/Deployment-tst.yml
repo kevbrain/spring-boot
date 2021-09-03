@@ -1,0 +1,53 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: spring-boot-tst
+  annotations:
+    build-commit: '@git.commit.id.abbrev@'
+    build-date: "@git.build.time@"
+  name: spring-boot
+  labels:
+    app: spring-boot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot
+  template:
+    metadata:
+      name: spring-boot
+      labels:
+        app: spring-boot
+      annotations:
+        build-commit: '@git.commit.id.abbrev@'
+        build-date: "@git.build.time@"
+    spec:
+      volumes:
+        - name: emptydirlogs
+          emptyDir: {}
+      containers:
+        - name: microservice-pod 
+          resources:
+            requests:
+              memory: 250Mi
+              cpu : 200m
+            limits:
+              memory: 750Mi
+              cpu : 500m
+          readinessProbe:
+            httpGet:
+              path: actuator/health
+              port: 8080
+              scheme: HTTP
+          env:
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: emptydirlogs
+              mountPath: /Logs
+          image: >-
+            image-registry.openshift-image-registry.svc.cluster.local:5000/spring-boot-tst/spring-boot:latest
+      restartPolicy: Always

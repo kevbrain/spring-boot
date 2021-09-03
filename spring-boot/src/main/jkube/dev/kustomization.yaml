@@ -1,0 +1,9 @@
+resources:
+- namespace-dev.yml
+- rolebinding-dev.yml
+- Deployment-dev.yml
+- ConfigMaps-dev.yml
+- Secrets-dev.yml
+- Service-dev.yaml
+- Routes-dev.yaml
+- Pipeline.yml

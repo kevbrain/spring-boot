@@ -1,0 +1,9 @@
+resources:
+- namespace-tst.yml
+- rolebinding-tst.yml
+- Deployment-tst.yml
+- ConfigMaps-tst.yml
+- Secrets-tst.yml
+- Service-tst.yaml
+- Routes-tst.yaml
+- Pipeline.yml
